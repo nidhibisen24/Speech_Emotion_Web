@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prediction Result</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1 class="result-title">Prediction Result</h1>
+
+        <div class="card">
+            {% if error %}
+                <div class="error-box">
+                    <h2 class="error">Prediction Failed</h2>
+                    <p>{{ error }}</p>
+                </div>
+            {% else %}
+                <div class="result-main">
+                    <div class="success-badge">Prediction Completed</div>
+                    <h2>Predicted Emotion: <span class="highlight">{{ emotion }}</span></h2>
+                    <h3>Confidence Score: {{ confidence }}%</h3>
+                </div>
+
+                <audio controls>
+                    <source src="/{{ audio_path }}" type="audio/wav">
+                    Your browser does not support audio playback.
+                </audio>
+
+                <h3 class="table-title">Class Probabilities</h3>
+                <table>
+                    <tr>
+                        <th>Emotion</th>
+                        <th>Probability (%)</th>
+                    </tr>
+                    {% for label, prob in probabilities.items() %}
+                    <tr>
+                        <td>{{ label }}</td>
+                        <td>{{ "%.2f"|format(prob) }}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            {% endif %}
+
+            <div style="text-align: center;">
+                <a href="/" class="back-link">Try Another File</a>
+            </div>
+        </div>
+
+        <p class="footer-note">Speech Emotion Recognition System</p>
+    </div>
+</body>
+</html>

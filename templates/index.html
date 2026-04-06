@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Speech Emotion Recognition</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div class="hero">
+            <h1>Speech Emotion Recognition</h1>
+            <p class="subtitle">Upload a WAV audio file and detect the emotion from speech using your trained ML model.</p>
+        </div>
+
+        <div class="card">
+            <div class="upload-box">
+                <p>Select a clear <strong>.wav</strong> audio file to begin prediction</p>
+                <form action="/predict" method="post" enctype="multipart/form-data">
+                    <input type="file" name="audiofile" accept=".wav" required>
+                    <br>
+                    <button type="submit">Predict Emotion</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="info-grid">
+            <div class="info-box">
+                <h3>Supported Emotions</h3>
+                <p>Angry, Disgust, Fear, Happy, Neutral, and Sad</p>
+            </div>
+
+            <div class="info-box">
+                <h3>Best Results</h3>
+                <p>Use a clean speech sample with less background noise for more accurate prediction.</p>
+            </div>
+
+            <div class="info-box">
+                <h3>Accepted Format</h3>
+                <p>Only WAV audio files are supported for analysis in this application.</p>
+            </div>
+        </div>
+
+        <p class="footer-note">Built with Flask, TensorFlow, Librosa, and Scikit-learn</p>
+    </div>
+</body>
+</html>
